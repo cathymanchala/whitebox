@@ -1,7 +1,7 @@
 from givencode import Product, ShoppingCart, Customer, PaymentGateway
 import unittest
 
-class TestShoppingCart(unittest.TestCase):
+class TestShop(unittest.TestCase):
 
     def setUp(self):
         #Product: name, price, stock
