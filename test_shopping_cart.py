@@ -9,6 +9,9 @@ class TestShoppingCart(unittest.TestCase):
         self.productTwo = Product("TestProductTwo", 25, 40)
         self.productThree = Product("Coffee", 10, 40)
         self.cart = ShoppingCart()
+        self.customer = Customer("TestCustomer")
+
+    #Tests for ShoppingCart
     
     def test_add_item(self):
         self.cart.add_item(self.productOne, 4)
@@ -47,6 +50,38 @@ class TestShoppingCart(unittest.TestCase):
         self.cart.add_item(self.productOne, 10)
         self.cart.add_item(self.productTwo, 14)
         self.assertEqual(self.cart.get_total_price(), 500)
+
+    #Tests for Customer
+
+    #Each customer has their own shopping cart
+    def test_checkout(self):
+        self.customer.cart.add_item(self.productThree, 2)
+        self.customer.checkout()
+        self.assertEqual(self.customer.cart.get_total_price(), 20)
+
+    #Tests for PaymentGateway
+    
+    #customer, total_amount
+    def test_payment(self):
+
+        #When cart is empty
+        print("test_payment")
+        self.customer.checkout()
+
+        #When cart is not empty
+        print("When cart is not empty")
+        self.customer.cart.add_item(self.productOne, 6)
+        self.customer.checkout()
+
+        #Test for failed payment
+        #Total price should be less than 0.
+        print("Failed Payment")
+        negativePricedProduct = Product("negativePricedProduct", -1, 10)
+        negativeCart = ShoppingCart()
+        negativeCustomer = Customer("NegativeCustomer")
+        negativeCustomer.cart.add_item(negativePricedProduct, 2)
+        negativeCustomer.checkout()
+
 
 if __name__ == "__main__":
     unittest.main()
