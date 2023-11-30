@@ -1,5 +1,3 @@
-The following is a Python code example with intentional faults for white-box testing. This code simulates a basic e-commerce system with multiple classes and potential issues. There is a `Product` class representing products with name, price, and stock and the `ShoppingCart` class manages items in a shopping cart and interacts with products.
-
 class Product:
     def __init__(self, name, price, stock):
         self.name = name
@@ -61,17 +59,3 @@ class Customer:
                 print ("Payment failed. Please try again.")
         else:
             print ("No items in the cart.")
-
-
-
-# Example use:
-product1 = Product ("Widget", 10.0, 100)
-product2 = Product("Gadget", 20.0, 50)
-customer = Customer("John")
-customer.cart.add_item(product1, 5)
-customer.cart.add_item(product2, 2)
-customer.checkout()
-
-
-
-Intentional faults include raising `ValueError` exceptions with incorrect exception types in some methods and checking for invalid conditions. You can use white-box testing to identify these faults, write test cases to cover various scenarios, and ensure the code functions correctly.
