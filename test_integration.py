@@ -1,9 +1,8 @@
-from givencode import Product, ShoppingCart, Customer, PaymentGateway
+from shop import Product, ShoppingCart, Customer, PaymentGateway
 import unittest
 
 class TestShopIntegration(unittest.TestCase):
      
-    #Setup for the required entities: products, customer and cart
     def setUp(self):
         self.customer = Customer("Tim")
         self.customerTwo = Customer("Edward")

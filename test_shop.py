@@ -1,10 +1,9 @@
-from givencode import Product, ShoppingCart, Customer, PaymentGateway
+from shop import Product, ShoppingCart, Customer, PaymentGateway
 import unittest
 
 class TestShop(unittest.TestCase):
 
     def setUp(self):
-        #Product: name, price, stock
         self.productOne = Product("TestProductOne", 15,20)
         self.productTwo = Product("TestProductTwo", 25, 40)
         self.productThree = Product("Coffee", 10, 40)
@@ -34,8 +33,6 @@ class TestShop(unittest.TestCase):
         self.cart.remove_item(self.productOne, 3)
         self.assertEqual(self.cart.items[self.productOne], 2)
 
-        #Initial stock:20, After adding to cart: 15, After removal: 15+3 = 18
-        #Initial cart quantity: 5, After removal: 2
         self.assertEqual(self.productOne.stock, 18)
 
         #ValueError is raised when requested removal count is greater than the quantity available in the cart
@@ -43,10 +40,6 @@ class TestShop(unittest.TestCase):
             self.cart.remove_item(self.productOne, 90)
 
     def test_price(self):
-        #Check if the dictionary of items (cart) is empty
-        print(type(self.cart.items))
-        print(not bool(self.cart.items))
-
         self.cart.add_item(self.productOne, 10)
         self.cart.add_item(self.productTwo, 14)
         self.assertEqual(self.cart.get_total_price(), 500)
@@ -61,21 +54,16 @@ class TestShop(unittest.TestCase):
 
     #Tests for PaymentGateway
     
-    #customer, total_amount
     def test_payment(self):
 
         #When cart is empty
-        print("test_payment")
         self.customer.checkout()
 
         #When cart is not empty
-        print("When cart is not empty")
         self.customer.cart.add_item(self.productOne, 6)
         self.customer.checkout()
 
         #Test for failed payment
-        #Total price should be less than 0.
-        print("Failed Payment")
         negativePricedProduct = Product("negativePricedProduct", -1, 10)
         negativeCart = ShoppingCart()
         negativeCustomer = Customer("NegativeCustomer")
